@@ -8,5 +8,5 @@ Manage all your secret-santa needs in one place
 * show wishlist - [x]
 * save wishlist - [x]
 * make checkbox mandatory - [x]
-* make warning msg conditional above submit button
+* make warning msg conditional above submit button [x]
 * logging - wishlist must be saved and updated [x] 

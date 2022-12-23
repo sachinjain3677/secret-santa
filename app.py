@@ -39,13 +39,14 @@ def home():
 
 
 # @app.route("/save_wishlist", methods=['POST'])
-def save_wishlist(name, address, contact, wishlist):
+def save_wishlist(name, address, contact, wishlist, password):
     # save info
     print('SAVING INFO')
     # print(name, address, contact, wishlist)
     wishlist_info[name]["address"] = address
     wishlist_info[name]["contact"] = contact
     wishlist_info[name]["wishlist"] = wishlist
+    wishlist_info[name]["password"] = password
 
     # Serializing json
     json_object = json.dumps(wishlist_info, indent=4)
@@ -60,32 +61,33 @@ def save_wishlist(name, address, contact, wishlist):
 def grant_elf():
     if request.method == 'POST':
         if request.form['name'] in santa_map:
+            if wishlist_info[request.form['name']]['password'] != request.form['password']:
+                logging.info("Wrong password entered by: " + request.form['name'])
+                return redirect(url_for('home'))
             chosen_one = santa_map.get(request.form['name'])
             msg = "You already picked " + chosen_one + ", DON'T be TOOO GENEROUS..."
             if wishlist_info[chosen_one]['address'] == "":
                 msg = msg + " Your Elf has not yet filled in their details, come back to me later!"
-            return render_template('elf.html', msg=msg, name=chosen_one, address=wishlist_info[chosen_one]['address'], contact=wishlist_info[chosen_one]['contact'], wishlist=wishlist_info[chosen_one]['wishlist'])
+            return render_template('elf.html', msg=msg, name=chosen_one, address=wishlist_info[chosen_one]['address'],
+                                   contact=wishlist_info[chosen_one]['contact'],
+                                   wishlist=wishlist_info[chosen_one]['wishlist'])
 
-        save_wishlist(request.form['name'], request.form['address'], request.form['contact'], request.form['wishlist'])
+        save_wishlist(request.form['name'], request.form['address'], request.form['contact'], request.form['wishlist'],
+                      request.form['password'])
 
         chosen_one = random.choice(names)
         # print("chosen_one: " + chosen_one)
         while chosen_one == request.form['name']:
             if len(names) == 1:
                 logging.info(request.form['name'] + " has no elf and is no one's elf")
-                # logging.info("FLAG!!" + santa_map.get("Sachin Jain"))
-                # logging.info("FLAG2!!" + request.form['name'])
-
-                santa_map[request.form['name']] = santa_map.get("Sachin Jain")
-                temp = santa_map.get("Sachin Jain")
-                # logging.info("flag3!!" + santa_map[request.form['name']])
-                santa_map["Sachin Jain"] = chosen_one
-                chosen_one = temp
+                chosen_one = santa_map.get("Sachin Jain")
+                santa_map["Sachin Jain"] = request.form['name']
+                names.remove(request.form['name'])
                 break
             chosen_one = random.choice(names)
-            # print("chosen_one: " + chosen_one)
 
-        names.remove(request.form['name'])
+        if chosen_one in names:
+            names.remove(chosen_one)
         logging.info(names)
         santa_map[request.form['name']] = chosen_one
         json_object = json.dumps(santa_map, indent=4)
@@ -93,11 +95,12 @@ def grant_elf():
             outfile.write(json_object)
         outfile.close()
 
-        # print(santa_map)
         msg = "Start buying gifts for " + chosen_one + ", in case you forget the name come to me, I will tell again."
         if wishlist_info[chosen_one]['address'] == "":
             msg = msg + " Your Elf has not yet filled in their details, come back to me later!"
-        return render_template('elf.html', msg=msg, name=chosen_one, address=wishlist_info[chosen_one]['address'], contact=wishlist_info[chosen_one]['contact'], wishlist=wishlist_info[chosen_one]['wishlist'])
+        return render_template('elf.html', msg=msg, name=chosen_one, address=wishlist_info[chosen_one]['address'],
+                               contact=wishlist_info[chosen_one]['contact'],
+                               wishlist=wishlist_info[chosen_one]['wishlist'])
     elif request.method == 'GET':
         return redirect(url_for('home'))
     else:
