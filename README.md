@@ -5,9 +5,8 @@ Manage all your secret-santa needs in one place
 * rerun if got your own name - [x]
 * take wishlist - [x]
 * don't assign me my name - [x]
-* show wishlist
-* save wishlist
+* show wishlist - [x]
+* save wishlist - [x]
 * make checkbox mandatory - [x]
 * make warning msg conditional above submit button
-* logging
-  * wishlist must be saved and updated
+* logging - wishlist must be saved and updated [x] 
