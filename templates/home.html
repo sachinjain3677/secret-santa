@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Santa registration form</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, p {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      }
+      h1 {
+      margin: 0;
+      font-weight: 400;
+      }
+      h3 {
+      margin: 12px 0;
+      color: #8ebf42;
+      }
+      .main-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      }
+      fieldset {
+      border: none;
+      border-top: 1px solid #8ebf42;
+      }
+      .account-details, .personal-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .account-details >div, .personal-details >div >div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      }
+      .account-details >div, .personal-details >div, input, label {
+      width: 100%;
+      }
+      label {
+      padding: 0 5px;
+      text-align: right;
+      vertical-align: middle;
+      }
+      input {
+      padding: 5px;
+      vertical-align: middle;
+      }
+      .checkbox {
+      margin-bottom: 10px;
+      }
+      select, .children, .gender, .bdate-block {
+      width: calc(100% + 26px);
+      padding: 5px 0;
+      }
+      select {
+      background: transparent;
+      }
+      .gender input {
+      width: auto;
+      }
+      .gender label {
+      padding: 0 5px 0 0;
+      }
+      .bdate-block {
+      display: flex;
+      justify-content: space-between;
+      }
+      .birthdate select.day {
+      width: 35px;
+      }
+      .birthdate select.mounth {
+      width: calc(100% - 94px);
+      }
+      .birthdate input {
+      width: 38px;
+      vertical-align: unset;
+      }
+      .checkbox input, .children input {
+      width: auto;
+      margin: -2px 10px 0 0;
+      }
+      .checkbox a {
+      color: #8ebf42;
+      }
+      .checkbox a:hover {
+      color: #82b534;
+      }
+      button {
+      width: 100%;
+      padding: 10px 0;
+      margin: 10px auto;
+      border-radius: 5px;
+      border: none;
+      background: #8ebf42;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      }
+      button:hover {
+      background: #82b534;
+      }
+      @media (min-width: 568px) {
+      .account-details >div, .personal-details >div {
+      width: 50%;
+      }
+      label {
+      width: 40%;
+      }
+      input {
+      width: 60%;
+      }
+      select, .children, .gender, .bdate-block {
+      width: calc(60% + 16px);
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-block">
+    <form action="grant_elf" method="post">
+      <h1>Create your wishlist</h1>
+      <fieldset>
+        <legend>
+          <h3>Personal Details</h3>
+        </legend>
+        <div  class="personal-details">
+          <div>
+            <div><label>Name*</label>
+              <select name="name" id="name" required>
+                <option value="" selected disabled hidden>Select Your Name</option>
+                <option value="Abhiruchi Chaudhari">Abhiruchi Chaudhari</option>
+                <option value="Arpan Barman">Arpan Barman</option>
+                <option value="Arpit Gupta">Arpit Gupta</option>
+                <option value="Giri Jagumantri">Giri Jagumantri</option>
+                <option value="Karthik Balasubramanian">Karthik Balasubramanian</option>
+                <option value="Manish Barman">Manish Barman</option>
+                <option value="Mansi Joshi">Mansi Joshi</option>
+                <option value="Pallavi Mittal">Pallavi Mittal</option>
+                <option value="Sachin Jain">Sachin Jain</option>
+                <option value="Shashank Shekhar">Shashank Shekhar</option>
+                <option value="Sunil Raj">Sunil Raj</option>
+                <option value="Sushaanth P">Sushaanth P</option>
+                <option value="Vibhas Goyal">Vibhas Goyal</option>
+              </select>
+            </div>
+            <div><label>Address*</label><input type="text" name="address" required></div>
+            <div><label>Contact*</label><input type="text" name="contact" required></div>
+            <div><label>Wishlist*</label><input type="text" name="wishlist" required></div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>
+          <h3>Terms</h3>
+        </legend>
+        <div  class="terms-mailing">
+          <div class="checkbox">
+            <input type="checkbox" id="myCheck1" name="checkbox1"><span>I solemnly swear that I will abide by the rules of the festival season by choosing a gift for my secret elf.</a></span>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox" id="myCheck2" name="checkbox2"><span>I solemnly swear to keep the identity of my elf a secret.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <div id="demo"></div>
+
+      <button type="submit" href="grant_elf" onclick="policyCheck()">Submit</button>
+    </form>
+    </div>
+
+    <script>
+      function policyCheck() {
+        document.getElementById("myCheck1").required = true;
+        document.getElementById("myCheck2").required = true;
+        document.getElementById("demo").innerHTML = "The required property was set. The checkbox must now be checked before submitting the form.";
+      }
+    </script>
+  </body>
+</html>
