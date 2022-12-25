@@ -68,8 +68,8 @@ def grant_elf():
         while chosen_one == request.form['name']:
             if len(names) == 1:
                 logging.info(request.form['name'] + " has no elf and is no one's elf")
-                chosen_one = santa_map.get("Sachin Jain")
-                santa_map["Sachin Jain"] = request.form['name']
+                chosen_one = santa_map.get("Alex")
+                santa_map["Alex"] = request.form['name']
                 names.remove(request.form['name'])
                 break
             chosen_one = random.choice(names)

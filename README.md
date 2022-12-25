@@ -33,3 +33,7 @@ Manage all your secret-santa needs in one place
 * pick the `Forwarding` URL given by ngrok and share with your friends to access at `<url>/home`
 * Note: for a server resume post intermittent halt on flask side doesn't require a ngrok restart
 * Note: an intermittent halt of ngrok doesn't require a restart of flask
+
+## potential pitfalls
+There might come a situation if case of odd number of people that a person is left without a santa and an elf.
+To counter this situation just add name of anyone from your group at `app.py, line 71, 72`. Just be sure that this person is **not** the last one to fill in their wishlist.
