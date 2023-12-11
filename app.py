@@ -14,7 +14,11 @@ with open('santa_map.json', 'r') as f:
     santa_map = json.load(f)
 f.close()
 
-names = ["Alex", "Bob", "Colin"]
+names = ["Manish Barman", "Sachin Jain", "Arpan Barman", "Abhiruchi Chaudhari", "Gayatri Prasad Kovvali",
+         "Karthik Balasubramanian", "Shashank Shekhar", "Sunil Raj", "Vibhas Goyal",
+         "Raghuram Pragallapati", "Arpit Gupta", "Giri Jagumantri", "Kirti Bagri", "Pallavi Mittal",
+         "Amit Agrawal", "Naveen Vakada", "Robins Lazer",
+         "Akhilesh Pandey"]
 
 with open('wishlist_info.json', 'r') as f:
     wishlist_info = json.load(f)
